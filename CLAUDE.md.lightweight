@@ -1,0 +1,24 @@
+# [PROJECT_NAME]
+
+## Project Overview
+- **Stack**: [STACK]
+- **Description**: [DESCRIPTION]
+- **Tier**: C (Stable/Maintenance)
+
+## File Organization
+- Never save working files to root folder
+- [LIST KEY DIRECTORIES AND FILES]
+
+## Build & Test
+```bash
+# [ADD PROJECT-SPECIFIC COMMANDS]
+```
+
+## Environment Variables
+- See `.env.example` for required variables
+
+## Security Rules
+- NEVER hardcode API keys, secrets, or credentials in any file
+- NEVER pass credentials as inline env vars in Bash commands
+- NEVER commit .env, .claude/settings.local.json, or .mcp.json to git
+- Always validate user input at system boundaries

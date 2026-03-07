@@ -1,0 +1,24 @@
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+.venv/
+venv/
+.pytest_cache/
+.ruff_cache/
+*.egg
+.DS_Store
+
+# Environment
+.env
+.env.*
+!.env.example
+!.env.template
+
+# Claude Code
+.claude/settings.local.json
+.claude/memory.db
+.claude/state/
+.claude/sessions/
+.mcp.json

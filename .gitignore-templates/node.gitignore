@@ -1,0 +1,19 @@
+node_modules/
+dist/
+build/
+.DS_Store
+*.log
+*.tgz
+
+# Environment
+.env
+.env.*
+!.env.example
+!.env.template
+
+# Claude Code
+.claude/settings.local.json
+.claude/memory.db
+.claude/state/
+.claude/sessions/
+.mcp.json

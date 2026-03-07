@@ -1,0 +1,44 @@
+# [PROJECT_NAME]
+
+## Project Overview
+- **Stack**: [STACK]
+- **Description**: [DESCRIPTION]
+- **Tier**: B (Active/Maintained)
+
+## File Organization
+- Never save working files to root folder
+- [LIST KEY DIRECTORIES AND FILES]
+
+## Build & Test
+```bash
+# Development
+[DEV COMMAND]
+
+# Build
+[BUILD COMMAND]
+
+# Test
+[TEST COMMAND]
+
+# Lint
+[LINT COMMAND]
+```
+
+## Environment Variables
+- See `.env.example` for required variables
+- [LIST KEY VARIABLES WITH DESCRIPTIONS]
+
+## Key Ports
+- [SERVICE]: [PORT]
+
+## Architecture Notes
+- [DESCRIBE KEY PATTERNS, CONVENTIONS, OR GOTCHAS]
+- [DATABASE RULES IF APPLICABLE]
+- [API PATTERNS IF APPLICABLE]
+
+## Security Rules
+- NEVER hardcode API keys, secrets, or credentials in any file
+- NEVER pass credentials as inline env vars in Bash commands
+- NEVER commit .env, .claude/settings.local.json, or .mcp.json to git
+- Always validate user input at system boundaries
+- [ADD PROJECT-SPECIFIC SECURITY RULES]

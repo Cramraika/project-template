@@ -1,0 +1,23 @@
+# clasp / Apps Script
+.clasp.json
+.clasp/
+
+# Local artifacts
+log.log
+sheet.xlsx
+*.csv
+
+# OS
+.DS_Store
+
+# Environment
+.env
+.env.*
+!.env.example
+
+# Claude Code
+.claude/settings.local.json
+.claude/memory.db
+.claude/state/
+.claude/sessions/
+.mcp.json

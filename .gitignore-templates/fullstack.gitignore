@@ -1,0 +1,34 @@
+# Node
+node_modules/
+dist/
+build/
+*.log
+*.tgz
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.pytest_cache/
+.ruff_cache/
+
+# Docker
+*.tar
+
+# OS
+.DS_Store
+
+# Environment
+.env
+.env.*
+!.env.example
+!.env.template
+
+# Claude Code
+.claude/settings.local.json
+.claude/memory.db
+.claude/state/
+.claude/sessions/
+.mcp.json
