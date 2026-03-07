@@ -67,9 +67,15 @@ case "$STACK" in
   apps-script) cp .github/workflows/ci-node.yml .github/workflows/ci.yml ;;
 esac
 
-# 4. Clean up template files
+# 4. Install branch protection hook (blocks direct pushes to main)
+if [ -d .git ]; then
+  cp .githooks/pre-push .git/hooks/pre-push 2>/dev/null && chmod +x .git/hooks/pre-push
+  echo "Installed pre-push hook (branch protection)"
+fi
+
+# 5. Clean up template files
 rm -f CLAUDE.md.lightweight CLAUDE.md.standard CLAUDE.md.advanced
-rm -rf .gitignore-templates
+rm -rf .gitignore-templates .githooks
 rm -f .github/workflows/ci-node.yml .github/workflows/ci-python.yml
 rm -f .github/workflows/ci-node-docker.yml .github/workflows/ci-python-docker.yml
 rm -f .github/workflows/ci-fullstack.yml
