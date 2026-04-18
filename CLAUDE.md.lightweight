@@ -8,25 +8,29 @@
 
 **Sources**: `~/.claude/conventions/universal-claudemd.md` (laws, MCP routing, lifecycle, rent rubric) + `~/.claude/conventions/project-hygiene.md` (doc placement, cleanup, local-workspaces). Read relevant sections before significant work. Re-audit due **2026-07-19**. Sync: `~/.claude/scripts/sync-preambles.py`.
 
-## Project Overview
+---
+
+## References
+- `~/.claude/conventions/universal-claudemd.md` — universal laws, MCP routing
+- `~/.claude/conventions/project-hygiene.md` — doc/scratch placement
+
+## Stack
 - **Stack**: [STACK]
 - **Description**: [DESCRIPTION]
-- **Tier**: C (Stable/Maintenance)
+- **Tier**: C (Stable / Maintenance)
 
-## File Organization
-- Never save working files to root folder
-- [LIST KEY DIRECTORIES AND FILES]
-
-## Build & Test
+## Build / Test / Deploy
 ```bash
 # [ADD PROJECT-SPECIFIC COMMANDS]
 ```
 
-## Environment Variables
-- See `.env.example` for required variables
+## Key Directories
+- `scripts/` — project scripts (never at repo root)
+- [LIST OTHER DIRS AS NEEDED]
 
-## Security Rules
-- NEVER hardcode API keys, secrets, or credentials in any file
-- NEVER pass credentials as inline env vars in Bash commands
-- NEVER commit .env, .claude/settings.local.json, or .mcp.json to git
-- Always validate user input at system boundaries
+## Security & Secrets
+- Never hardcode API keys, PATs, credentials. Use env vars + `.env.example`.
+- Never commit `.env`, `.claude/settings.local.json`, or `.mcp.json`.
+
+## Deviations from Universal Laws
+- None. (If overriding a universal rule, state it + why here.)

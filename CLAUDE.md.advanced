@@ -8,31 +8,49 @@
 
 **Sources**: `~/.claude/conventions/universal-claudemd.md` (laws, MCP routing, lifecycle, rent rubric) + `~/.claude/conventions/project-hygiene.md` (doc placement, cleanup, local-workspaces). Read relevant sections before significant work. Re-audit due **2026-07-19**. Sync: `~/.claude/scripts/sync-preambles.py`.
 
-## Project Architecture
+---
 
+## References
+- `~/.claude/conventions/universal-claudemd.md` — universal laws, MCP routing, rent rubric, context ceilings
+- `~/.claude/conventions/project-hygiene.md` — doc placement, cleanup triggers, local-workspaces
+- `~/.claude/conventions/repo-inventory.md` — this repo's inventory entry + plugin profile
+- `~/.claude/specs/claude-environment-architecture.md` — 6-layer context model
+- Per-repo auto-memory: `~/.claude/projects/-Users-<user>-Documents-Github-[PROJECT_NAME]/memory/` (if populated)
+
+## Stack
 - **Stack**: [STACK]
 - **Description**: [DESCRIPTION]
-- **Tier**: A (Active/Complex)
-- **Processes**: [LIST RUNTIME PROCESSES]
-- **Source of truth**: `MEMORY.md` for domain traps, status enums, patterns
+- **Vision**: [VISION — pinnacle/production form; drives active role-lanes]
+- **Tier**: A (Active / Complex)
+- **Runtime processes**: [LIST RUNTIME PROCESSES — e.g. API, worker, scheduler, frontend]
+- **Source of truth**: `MEMORY.md` for domain traps, status enums, query patterns
+
+## Active Role-Lanes
+<!-- Pinnacle-vision role-lanes; activate based on where this project is headed, not current state -->
+- [ENGINEER / ARCHITECT / SRE — always-on for complex systems]
+- [DESIGNER — if UI surface exists or planned]
+- [ANALYST — if metrics / funnel / cohort work exists]
+- [MANAGER — if cross-team coordination present]
+- [WRITER / SEO / MARKETER — if content/growth surface]
+- [TESTER — always-on]
 
 ## Critical Domain Rules
 
-### Column/Schema Traps
+### Column / Schema Traps
 - [LIST DATABASE COLUMN NAMING GOTCHAS]
 - [LIST STATUS ENUMS WITH EXACT VALUES]
-- [LIST FOREIGN KEY RELATIONSHIPS]
+- [LIST FOREIGN KEY RELATIONSHIPS + CASCADE RULES]
 
 ### Query Patterns
 - [TIMEZONE HANDLING RULES]
-- [TYPE COERCION RULES]
-- [ROLE/PERMISSION PATTERNS]
+- [TYPE COERCION / JSON-COLUMN RULES]
+- [ROLE / PERMISSION / RLS PATTERNS]
 
-## File Organization
-- Never save working files to root folder
-- [LIST ALL KEY DIRECTORIES WITH DESCRIPTIONS]
+### Business Invariants
+- [INVARIANTS THAT MUST HOLD — see universal § 30 for universal set]
+- [PROJECT-SPECIFIC INVARIANTS BEYOND UNIVERSAL]
 
-## Build & Test
+## Build / Test / Deploy
 ```bash
 # Development
 [DEV COMMAND]
@@ -40,49 +58,71 @@
 # Build
 [BUILD COMMAND]
 
-# Test
+# Test (unit, integration — integration hits real systems per universal § 4)
 [TEST COMMAND]
 
-# Database
+# Lint / typecheck
+[LINT COMMAND]
+
+# Database (migration up/down, seed, reset)
 [DB COMMANDS]
 
-# Deployment
+# Deployment (staging / prod)
 [DEPLOY COMMANDS]
 ```
 
-## Environment Variables
-- See `.env.example` for required variables
-- [LIST ALL VARIABLES WITH DESCRIPTIONS]
+## Key Directories
+- `src/` — source code
+- `scripts/` — project scripts (migrations under `scripts/migrations/YYYY-MM-DD-<slug>.sh`)
+- `docs/` — see project-hygiene.md § doc-placement for subdir taxonomy
+- `docs/architecture/`, `docs/specs/`, `docs/plans/`, `docs/runbooks/`, `docs/adrs/`, `docs/audits/`
+- `.claude/` — per-project settings + helpers
+- `.github/workflows/` — CI/CD pipelines
+- [LIST ADDITIONAL KEY DIRECTORIES]
 
-## Key Ports
-- [SERVICE]: [PORT]
+## Dependency Graph
+<!-- Major intra-repo module deps + external service deps; used when cross-cutting work hits -->
+- **Internal modules**: [e.g. `api → services → db`, `worker → queue → services`]
+- **External services**: [LIST EXTERNAL APIS, DB, CACHE, QUEUE, 3RD-PARTY SDK]
+- **Upstream repos**: [IF MULTI-REPO PRODUCT, LIST PEERS]
 
-## Subagent Registry
+## Known Limitations
+- [RATE LIMITS, QUOTA CEILINGS, PLATFORM CAPS]
+- [KNOWN BUGS / WORKAROUNDS]
+- [DEFERRED ARCHITECTURE WORK]
 
-| Trigger Keywords | Agent | Model |
-|-----------------|-------|-------|
-| [KEYWORDS] | [AGENT_NAME] | [haiku/sonnet/opus] |
-
-## Agent Routing
-
-| Task | Agents |
-|------|--------|
-| Bug Fix | researcher, coder, tester |
-| Feature | planner, coder, tester, reviewer |
-| Refactor | researcher, coder, reviewer |
-| Performance | researcher, coder |
-| Security | researcher, reviewer |
-
-## Important Rules
-
-- NEVER create files unless absolutely necessary. Prefer editing existing files
-- NEVER proactively create documentation files. Only if explicitly requested
-- Never save working files to root folder
-- Do what has been asked; nothing more, nothing less
-
-## Security Rules
-- NEVER hardcode API keys, secrets, or credentials in any file
-- NEVER pass credentials as inline env vars in Bash commands
-- NEVER commit .env, .claude/settings.local.json, or .mcp.json to git
-- Always validate user input at system boundaries
+## Security & Secrets
+- Never hardcode API keys, PATs, OAuth tokens. Use env vars + `.env.example`.
+- Never pass credentials as inline env vars in Bash commands.
+- Never commit `.env`, `.claude/settings.local.json`, `.mcp.json`, credentials files.
+- RBAC / auth checks on all mutating endpoints (universal § 30.2).
+- Redact PII + secrets at capture time (universal § 23).
 - [ADD PROJECT-SPECIFIC SECURITY RULES]
+
+## Deployment Environments
+- **Dev**: [LOCAL SETUP]
+- **Staging**: [URL / HOST / BRANCH TRIGGER]
+- **Production**: [URL / HOST / BRANCH TRIGGER]
+- **Rollback procedure**: [DOCUMENT OR LINK TO RUNBOOK]
+
+## External Services (MCPs, integrations)
+<!-- Use capability-resolution per universal § 15; these are current concrete resolutions -->
+- [MCPs: sentry / posthog / linear / supabase / stripe / figma / slack — list those used]
+- [External APIs / webhooks / third-party integrations]
+- [Monitoring: Grafana / Sentry dashboards]
+
+## Roadmap / Future Slots
+- **Next phase**: [IN-PROGRESS FEATURES]
+- **Deferred**: [ACCEPTED BUT NOT THIS CYCLE — use universal status tag `DEFERRED`]
+- **Speculative**: [IDEAS — needs decision]
+
+## Doc Maintainers
+- **Code owner**: [USER HANDLE]
+- **Docs owner**: [USER HANDLE]
+- **README stance**: Living OR Frozen — pick one (see project-hygiene.md § README curation)
+- **Help-doc owner**: [USER HANDLE — user owns voice per project-hygiene.md]
+- **Last drift check**: <YYYY-MM-DD>
+
+## Deviations from Universal Laws
+<!-- Intentional overrides of ~/.claude/conventions/*.md; state rule + reason. Empty if none. -->
+- None. (If overriding a universal rule, cite universal § and reason here.)

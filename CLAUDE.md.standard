@@ -8,16 +8,26 @@
 
 **Sources**: `~/.claude/conventions/universal-claudemd.md` (laws, MCP routing, lifecycle, rent rubric) + `~/.claude/conventions/project-hygiene.md` (doc placement, cleanup, local-workspaces). Read relevant sections before significant work. Re-audit due **2026-07-19**. Sync: `~/.claude/scripts/sync-preambles.py`.
 
-## Project Overview
+---
+
+## References
+- `~/.claude/conventions/universal-claudemd.md` — universal laws, MCP routing, rent rubric
+- `~/.claude/conventions/project-hygiene.md` — doc placement, cleanup triggers
+- `~/.claude/conventions/repo-inventory.md` — this repo's inventory entry + profile
+
+## Stack
 - **Stack**: [STACK]
 - **Description**: [DESCRIPTION]
-- **Tier**: B (Active/Maintained)
+- **Vision**: [VISION — where this project is headed]
+- **Tier**: B (Active / Maintained)
 
-## File Organization
-- Never save working files to root folder
-- [LIST KEY DIRECTORIES AND FILES]
+## Active Role-Lanes
+<!-- Pick lanes active for this repo (Engineer, Designer, Manager, Analyst, Writer, SEO, Marketer, Tester, SRE) -->
+- Engineer
+- Tester
+- [ADD LANES AS NEEDED]
 
-## Build & Test
+## Build / Test / Deploy
 ```bash
 # Development
 [DEV COMMAND]
@@ -32,21 +42,38 @@
 [LINT COMMAND]
 ```
 
-## Environment Variables
-- See `.env.example` for required variables
-- [LIST KEY VARIABLES WITH DESCRIPTIONS]
+## Key Directories
+- `src/` (or equivalent) — source code
+- `scripts/` — project scripts
+- `docs/` — see project-hygiene.md § doc-placement table
+- [LIST OTHER KEY DIRECTORIES]
 
-## Key Ports
-- [SERVICE]: [PORT]
+## Known Limitations
+- [LIST CONSTRAINTS, PLATFORM LIMITS, RATE LIMITS]
 
-## Architecture Notes
-- [DESCRIBE KEY PATTERNS, CONVENTIONS, OR GOTCHAS]
-- [DATABASE RULES IF APPLICABLE]
-- [API PATTERNS IF APPLICABLE]
-
-## Security Rules
-- NEVER hardcode API keys, secrets, or credentials in any file
-- NEVER pass credentials as inline env vars in Bash commands
-- NEVER commit .env, .claude/settings.local.json, or .mcp.json to git
-- Always validate user input at system boundaries
+## Security & Secrets
+- Never hardcode API keys, PATs, credentials. Use env vars + `.env.example`.
+- Never pass credentials as inline env vars in Bash commands.
+- Never commit `.env`, `.claude/settings.local.json`, or `.mcp.json`.
 - [ADD PROJECT-SPECIFIC SECURITY RULES]
+
+## Deployment Environments
+- **Dev**: [DESCRIBE OR N/A]
+- **Staging**: [DESCRIBE OR N/A]
+- **Production**: [DESCRIBE OR N/A]
+
+## External Services (MCPs, integrations)
+- [LIST MCPs USED: sentry / posthog / linear / supabase / stripe / figma / slack / etc]
+- [LIST EXTERNAL APIS / WEBHOOKS]
+
+## Roadmap / Future Slots
+- [NEXT FEATURE / PHASE]
+- [DEFERRED WORK]
+
+## Doc Maintainers
+- **Owner**: [USER HANDLE]
+- **README stance**: Frozen (Claude edits only on explicit ask) OR Living (Claude updates with code) — pick one
+- **Last drift check**: <YYYY-MM-DD>
+
+## Deviations from Universal Laws
+- None. (If overriding a universal rule, state it + why here.)
