@@ -1,6 +1,15 @@
 # Project Template
 
+> **Ready-to-fork GitHub Template with Claude Code conventions, CI/CD, security rules, and 3 tiered CLAUDE.md variants baked in.**
+
+[![GitHub Sponsors](https://img.shields.io/github/sponsors/Cramraika?logo=github&label=Sponsor)](https://github.com/sponsors/Cramraika)
+[![Use this template](https://img.shields.io/badge/-Use%20this%20template-2ea44f?logo=github)](https://github.com/Cramraika/project-template/generate)
+
 Reusable template for new projects with Claude Code configuration, CI/CD pipelines, security settings, and standardized .gitignore.
+
+## 💖 Sponsor
+
+This template encodes months of real-world Claude Code workflow refinement — feel free to [sponsor the work](https://github.com/sponsors/Cramraika) if it saves you time spinning up new repos.
 
 ## Quick Start
 
