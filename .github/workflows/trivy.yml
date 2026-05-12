@@ -1,0 +1,71 @@
+# Trivy CVE scan workflow template — copy to <repo>/.github/workflows/trivy.yml
+# Per ADR-041 (Trivy + Cosign deploy gate). Advisory-mode initially:
+# - Scans filesystem (lockfiles + Dockerfile) for HIGH+CRITICAL CVEs
+# - Uploads SARIF to GitHub Code Scanning for visibility
+# - continue-on-error: true so findings surface without blocking merges
+#
+# Tightening path (per ADR-041 §Decision phased rollout):
+#   1. Start advisory (this file, continue-on-error: true)
+#   2. Add `.trivyignore` allowlist entries with mandatory `# expires=YYYY-MM-DD`
+#   3. Flip to blocking-mode by removing continue-on-error after baseline clean
+#   4. Coolify pre-deploy hook enforces image-scan refusal on CRITICAL (vps_host/scripts/coolify-hooks/trivy-pre-deploy.sh)
+#
+# Companion: cosign-sign-image.yml (image signing on tag push)
+
+name: Trivy CVE scan
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+  workflow_dispatch:
+  schedule:
+    # Weekly drift sweep to catch newly-disclosed CVEs in unchanged deps
+    - cron: '0 6 * * 1'
+
+permissions:
+  contents: read
+  security-events: write  # required to upload SARIF to Code Scanning
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  trivy-fs:
+    name: Trivy filesystem scan
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Run Trivy vulnerability scanner (table output)
+        uses: aquasecurity/trivy-action@0.28.0
+        continue-on-error: true
+        with:
+          scan-type: 'fs'
+          scan-ref: '.'
+          severity: 'HIGH,CRITICAL'
+          ignore-unfixed: true
+          format: 'table'
+          exit-code: '0'  # advisory mode; flip to '1' to block on findings
+
+      - name: Run Trivy vulnerability scanner (SARIF for Code Scanning)
+        uses: aquasecurity/trivy-action@0.28.0
+        continue-on-error: true
+        with:
+          scan-type: 'fs'
+          scan-ref: '.'
+          severity: 'HIGH,CRITICAL'
+          ignore-unfixed: true
+          format: 'sarif'
+          output: 'trivy-results.sarif'
+          exit-code: '0'
+
+      - name: Upload Trivy results to GitHub Code Scanning
+        uses: github/codeql-action/upload-sarif@v3
+        if: always()
+        with:
+          sarif_file: 'trivy-results.sarif'
+          category: trivy-fs
