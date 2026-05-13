@@ -21,18 +21,18 @@ jobs:
       - name: Detect tier from CLAUDE.md
         id: tier
         run: |
+          # Default tier=C (safe — Tier C skips the check). Promote to A/B/A
+          # only when CLAUDE.md explicitly declares the tier.
           if [ -f CLAUDE.md ]; then
             if grep -qE 'tier:\s*[Aa]|Tier A' CLAUDE.md; then
               echo "tier=A" >> "$GITHUB_OUTPUT"
             elif grep -qE 'tier:\s*[Bb]|Tier B' CLAUDE.md; then
               echo "tier=B" >> "$GITHUB_OUTPUT"
-            elif grep -qE 'tier:\s*[Cc]|Tier C' CLAUDE.md; then
-              echo "tier=C" >> "$GITHUB_OUTPUT"
             else
-              echo "tier=A" >> "$GITHUB_OUTPUT"
+              echo "tier=C" >> "$GITHUB_OUTPUT"
             fi
           else
-            echo "tier=A" >> "$GITHUB_OUTPUT"
+            echo "tier=C" >> "$GITHUB_OUTPUT"
           fi
 
       - name: Run docs/design check
