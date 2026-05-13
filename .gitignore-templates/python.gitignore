@@ -22,3 +22,9 @@ venv/
 .claude/state/
 .claude/sessions/
 .mcp.json
+
+# Code-intel tool outputs (per universal-claudemd v34+ §44)
+graphify-out/
+.gitnexus
+.serena/
+.gradle/
