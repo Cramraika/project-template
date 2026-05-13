@@ -1,0 +1,38 @@
+.gitnexus
+
+# graphify outputs (per universal-claudemd v21 §44)
+graphify-out/
+
+# Serena per-project state (LSP cache + memory)
+.serena/
+
+# OS / IDE
+.DS_Store
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Env / secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Logs
+*.log
+logs/
+
+# Node / Python
+node_modules/
+__pycache__/
+*.pyc
+.venv/
+venv/
+dist/
+build/
+.next/
+.cache/
+coverage/
