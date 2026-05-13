@@ -79,6 +79,16 @@ rm -rf .gitignore-templates .githooks
 rm -f .github/workflows/ci-node.yml .github/workflows/ci-python.yml
 rm -f .github/workflows/ci-node-docker.yml .github/workflows/ci-python-docker.yml
 rm -f .github/workflows/ci-fullstack.yml
+
+# 5b. Remove Docker-dependent workflows for non-Docker stacks
+# (cosign + trivy reference ghcr.io/${REPO} images that won't exist for CLI/Sheets repos)
+case "$STACK" in
+  apps-script|python)
+    rm -f .github/workflows/cosign-sign-image.yml .github/workflows/trivy.yml
+    echo "Removed cosign-sign-image.yml + trivy.yml (non-Docker stack: $STACK)"
+    ;;
+esac
+
 rm -f init.sh
 
 echo "Setup complete!"
