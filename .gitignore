@@ -6,6 +6,9 @@ graphify-out/
 # Serena per-project state (LSP cache + memory)
 .serena/
 
+# gitnexus auto-generated per-repo skills (regenerate via `gitnexus setup`)
+.claude/skills/gitnexus/
+
 # OS / IDE
 .DS_Store
 .idea/
