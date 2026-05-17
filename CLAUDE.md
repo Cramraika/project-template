@@ -118,5 +118,25 @@ git add CLAUDE.md.* && git commit -m "chore: bump tier templates to vN"
 - No secrets in templates. `.env.example` patterns only.
 - `init.sh` MUST not embed credentials.
 
+## VPS Service Navigation (template stub)
+
+Every new repo that deploys onto the dual-VPS platform SHOULD carry a `## VPS Service Navigation` section in its `CLAUDE.md` so that repo's CC can operate its VPS-side services headlessly (operator does no UI work — CC handles 99% via API / CLI / MCP). Canonical service playbooks: `platform-docs/02-governance/service-playbooks/`. Fill the table below at onboarding:
+
+```markdown
+## VPS Service Navigation
+
+| Service | This repo's resource | How CC leverages it | Canonical playbook |
+|---|---|---|---|
+| **Infisical** (secrets) | Project `[PROJECT_NAME]` id `[INFISICAL_PROJECT_ID]`, envs dev/staging/prod | `mcp__infisical__*` (read) / API with `vps-operator` creds (write) | `service-playbooks/substrate/infisical.md` §9.5 |
+| **Coolify** (orchestration) | App `[APP_NAME]` uuid `[COOLIFY_APP_UUID]`, runs on `[vagary-core-1|vagary-compute-1]` | Coolify API; MCP 404 over public → SSH `docker` fallback | `service-playbooks/substrate/coolify.md` §5,§7 |
+| **Reverse proxy** | `[Caddy vhost on core-1 | Traefik via Coolify on compute-1]` | Vhost via vps-ansible template / Coolify app config | `service-playbooks/substrate/{caddy,traefik}.md` |
+| **DNS** | `[domain]` zone in Cloudflare | CF API scoped token | `service-playbooks/substrate/cloudflare.md` |
+| **Error store** | GlitchTip/Sentry DSN (in Infisical) | Per-app project; never dual-report | `service-playbooks/observability/glitchtip.md` |
+| **Observability** | Loki `{app="[PROJECT_NAME]"}` + Prometheus | `grafana` / Loki MCP | `service-playbooks/observability/*.md` |
+| **Mail** | `[n/a | Mailcow domain]` | `platform-docs/docs/runbooks/mail-add-domain.md` | `service-playbooks/specialized/mailcow.md` |
+```
+
+`init.sh` leaves this section as the template above; the onboarding session fills the bracketed values per `service-playbooks/substrate/infisical.md` §6 wiring guide.
+
 ## Deviations from Universal Laws
 - None. (Templates intentionally have placeholder content `[PROJECT_NAME]`, `[STACK]`, `[DESCRIPTION]` — these are not universal-law violations; they're filled in by `init.sh`.)
