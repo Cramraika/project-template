@@ -35,7 +35,20 @@ case "$TIER" in
 esac
 
 echo ""
-echo "Configuring project: $PROJECT_NAME ($STACK, Tier $TIER)"
+echo "Backup tier options (per platform-docs restic playbook B1–B9 taxonomy):"
+echo "  T1   = SEV1 stateful (postgres/mongo/mariadb/volume) — daily restic + B2/R2/GCS offsite"
+echo "  T2   = Coolify config-only — weekly via substrate-config batch (no product cron)"
+echo "  T3   = Mobile/CLI/store/Apps Script — no VPS backup; GitHub Releases canonical"
+echo "  skip = decide later (default)"
+read -p "Backup tier? (T1/T2/T3/skip) [skip]: " BACKUP_TIER
+BACKUP_TIER=${BACKUP_TIER:-skip}
+case "$BACKUP_TIER" in
+  T1|T2|T3|skip) ;;
+  *) echo "Error: Invalid backup tier. Choose: T1, T2, T3, skip"; exit 1 ;;
+esac
+
+echo ""
+echo "Configuring project: $PROJECT_NAME ($STACK, Tier $TIER, Backup $BACKUP_TIER)"
 echo ""
 
 # 1. Copy appropriate CLAUDE.md template
@@ -72,6 +85,27 @@ if [ -d .git ]; then
   cp .githooks/pre-push .git/hooks/pre-push 2>/dev/null && chmod +x .git/hooks/pre-push
   echo "Installed pre-push hook (branch protection)"
 fi
+
+# 4b. Copy backup-tier scaffold (if not skipped)
+case "$BACKUP_TIER" in
+  T1|T2|T3)
+    mkdir -p .claude/scaffolds/backup
+    if [ -f ".claude/scaffolds/backup/restic-${BACKUP_TIER}.md" ]; then
+      cp ".claude/scaffolds/backup/restic-${BACKUP_TIER}.md" .claude/scaffolds/backup/restic.md
+      echo "Installed backup scaffold: .claude/scaffolds/backup/restic.md (tier $BACKUP_TIER)"
+    else
+      echo "Warning: backup scaffold restic-${BACKUP_TIER}.md not found; skipping"
+    fi
+    # Remove the other tier scaffolds so the new repo carries only its own
+    rm -f .claude/scaffolds/backup/restic-T1.md .claude/scaffolds/backup/restic-T2.md .claude/scaffolds/backup/restic-T3.md
+    ;;
+  skip)
+    # Leave all three scaffolds in place so operator can choose during onboarding session
+    if [ -d .claude/scaffolds/backup ]; then
+      echo "Backup tier deferred; all three scaffolds retained at .claude/scaffolds/backup/restic-T{1,2,3}.md"
+    fi
+    ;;
+esac
 
 # 5. Clean up template files
 rm -f CLAUDE.md.lightweight CLAUDE.md.standard CLAUDE.md.advanced
