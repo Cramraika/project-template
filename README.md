@@ -32,6 +32,19 @@ The template ships with **three tier-scaled `CLAUDE.md` variants**. `init.sh` co
 | **B** | `CLAUDE.md.standard` | ~60 lines | Typical apps — single service, active feature work | References, Stack+Vision, Role-Lanes, Build/Test/Deploy, Key Directories, Known Limitations, Security, Deployment Envs, External Services, Roadmap, Doc Maintainers, Deviations |
 | **C** | `CLAUDE.md.lightweight` | ~30 lines | Utility / scripts / tool repos — low-complexity, mostly stable | References, Stack, Build/Test/Deploy, Key Directories, Security, Deviations |
 
+### Add-on: orchestrator scaffold
+
+Beyond the 3 tier variants, `init.sh` can additionally render an **orchestrator scaffold** per [ADR-068 registry-as-IaC pattern](https://github.com/Cramraika/platform-docs/blob/main/04-decision-memory/adrs/ADR-068-site-discoverability-orchestration.md). Pick this when the new repo's purpose is to **manage per-entity lifecycle against a vendor API** (Glitchtip projects, Mailcow domains, GSC properties, Cloudflare zones, etc.) in a `reconcile` + `apply` pattern.
+
+Reference orchestrators:
+- `vps_host/scripts/glitchtip-orchestrator/` (commit `83a04df`)
+- `vps_host/scripts/mailcow-orchestrator/` (commit `e04e612`)
+- `vps_host/scripts/site-discoverability/`
+
+The scaffold renders Python 3.12+ with `pytest` + `ruff`, a vendor-API client + YAML registry + state-diff lib, `reconcile` / `apply` / `list-live` subcommands, a runbook, a design-doc skeleton (with §27.6 closing-pass checklist), and CI (`ruff` + `pytest` + jq registry-shape lint). Out of the box: **14 unit tests pass** on the rendered example.
+
+Placeholders prompted (8): `ORCHESTRATOR_NAME`, `VENDOR_NAME`, `API_BASE_URL`, `INFISICAL_PATH`, `ENTITY_NAME`, `ENTITY_NAME_PLURAL`, `ENTITY_API_PATH` (+ derived `ORCHESTRATOR_PKG` from `ORCHESTRATOR_NAME`).
+
 ### Common preamble
 
 All three variants open with the same v8 preamble:
@@ -70,10 +83,12 @@ All three variants contain bracketed placeholders. `init.sh` fills two of them a
 
 ## `init.sh` behavior
 
-Running `./init.sh` prompts for three inputs:
+Running `./init.sh` prompts for these inputs:
 1. **Project name** — substitutes `[PROJECT_NAME]` in `CLAUDE.md`
 2. **Stack** (`node` / `python` / `fullstack` / `apps-script`) — substitutes `[STACK]`, copies the right `.gitignore`, picks the matching CI workflow
 3. **Tier** (`A` / `B` / `C`, default `C`) — picks which `CLAUDE.md.*` variant becomes `CLAUDE.md`
+4. **Orchestrator scaffold?** (`y` / `n`, default `n`) — if `y`, prompts for `ORCHESTRATOR_NAME`, `VENDOR_NAME`, `API_BASE_URL`, `INFISICAL_PATH`, `ENTITY_NAME`, `ENTITY_NAME_PLURAL`, `ENTITY_API_PATH`, then renders `scripts/<name>/` per ADR-068
+5. **Backup tier** (`T1` / `T2` / `T3` / `skip`) — picks the restic backup playbook scaffold
 
 Then it:
 - Copies the chosen tier variant to `CLAUDE.md` + substitutes the two placeholders

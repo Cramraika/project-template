@@ -35,6 +35,44 @@ case "$TIER" in
 esac
 
 echo ""
+echo "Orchestrator scaffold (per ADR-068 registry-as-IaC pattern):"
+echo "  y    = render orchestrator scaffold (Python 3.12+; reconcile/apply/verify)"
+echo "  n    = no orchestrator (default)"
+read -p "Add orchestrator scaffold? (y/n) [n]: " ORCH_ENABLED
+ORCH_ENABLED=${ORCH_ENABLED:-n}
+case "$ORCH_ENABLED" in
+  y|n) ;;
+  *) echo "Error: answer y or n"; exit 1 ;;
+esac
+
+if [ "$ORCH_ENABLED" = "y" ]; then
+  read -p "  ORCHESTRATOR_NAME (e.g. glitchtip-orchestrator): " ORCHESTRATOR_NAME
+  if [ -z "$ORCHESTRATOR_NAME" ]; then
+    echo "Error: ORCHESTRATOR_NAME required"; exit 1
+  fi
+  # Derive package name (underscores instead of hyphens).
+  ORCHESTRATOR_PKG=$(echo "$ORCHESTRATOR_NAME" | tr '-' '_')
+  read -p "  VENDOR_NAME (e.g. Glitchtip): " VENDOR_NAME
+  if [ -z "$VENDOR_NAME" ]; then
+    echo "Error: VENDOR_NAME required"; exit 1
+  fi
+  VENDOR_NAME_UPPER=$(echo "$VENDOR_NAME" | tr '[:lower:]' '[:upper:]' | tr '-' '_')
+  read -p "  API_BASE_URL (e.g. https://errors.chinmayramraika.in): " API_BASE_URL
+  if [ -z "$API_BASE_URL" ]; then
+    echo "Error: API_BASE_URL required"; exit 1
+  fi
+  read -p "  INFISICAL_PATH [/${ORCHESTRATOR_NAME}]: " INFISICAL_PATH
+  INFISICAL_PATH=${INFISICAL_PATH:-/${ORCHESTRATOR_NAME}}
+  read -p "  ENTITY_NAME (e.g. brand, domain, mailbox) [entity]: " ENTITY_NAME
+  ENTITY_NAME=${ENTITY_NAME:-entity}
+  read -p "  ENTITY_NAME_PLURAL (e.g. brands, domains) [${ENTITY_NAME}s]: " ENTITY_NAME_PLURAL
+  ENTITY_NAME_PLURAL=${ENTITY_NAME_PLURAL:-${ENTITY_NAME}s}
+  read -p "  ENTITY_API_PATH (REST list noun, e.g. projects) [${ENTITY_NAME_PLURAL}]: " ENTITY_API_PATH
+  ENTITY_API_PATH=${ENTITY_API_PATH:-${ENTITY_NAME_PLURAL}}
+  export ORCHESTRATOR_NAME ORCHESTRATOR_PKG VENDOR_NAME VENDOR_NAME_UPPER API_BASE_URL INFISICAL_PATH ENTITY_NAME ENTITY_NAME_PLURAL ENTITY_API_PATH
+fi
+
+echo ""
 echo "Backup tier options (per platform-docs restic playbook B1–B9 taxonomy):"
 echo "  T1   = SEV1 stateful (postgres/mongo/mariadb/volume) — daily restic + B2/R2/GCS offsite"
 echo "  T2   = Coolify config-only — weekly via substrate-config batch (no product cron)"
@@ -107,8 +145,22 @@ case "$BACKUP_TIER" in
     ;;
 esac
 
+# 4c. Render orchestrator scaffold (if enabled).
+# Per ADR-068 + OW-106: registry-as-IaC pattern (Glitchtip 83a04df + Mailcow e04e612 + site-discoverability).
+if [ "$ORCH_ENABLED" = "y" ]; then
+  if [ -f .claude/scaffolds/orchestrator/render.py ]; then
+    PROJECT_ROOT="$(pwd)" python3 .claude/scaffolds/orchestrator/render.py
+    echo "Installed orchestrator scaffold: scripts/${ORCHESTRATOR_NAME}/ + docs/{runbooks,specs}/"
+    # Remove the scaffold dir post-render so the new repo doesn't carry it.
+    rm -rf .claude/scaffolds/orchestrator
+  else
+    echo "Warning: orchestrator scaffold render.py missing; skipping"
+  fi
+fi
+
 # 5. Clean up template files
 rm -f CLAUDE.md.lightweight CLAUDE.md.standard CLAUDE.md.advanced
+rm -f CLAUDE.md.orchestrator
 rm -rf .gitignore-templates .githooks
 rm -f .github/workflows/ci-node.yml .github/workflows/ci-python.yml
 rm -f .github/workflows/ci-node-docker.yml .github/workflows/ci-python-docker.yml

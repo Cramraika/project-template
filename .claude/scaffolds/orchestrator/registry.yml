@@ -1,0 +1,23 @@
+# {{VENDOR_NAME}} registry — registry-as-IaC declared state.
+#
+# Pattern source: ADR-068 site-discoverability template.
+#
+# Universal rules:
+# - §27 append-only artefact discipline (writeback fields only).
+# - §43.7 names-not-evidence (entity_id fetched from API at reconcile).
+#
+# Schema:
+#   name              — canonical {{ENTITY_NAME}} identifier
+#   slug              — URL-safe identifier matching live API
+#   desired_state     — live | tbd | paused | remove
+#   entity_id         — populated by reconcile from API (writeback)
+#   last_reconciled   — ISO8601 stamp; written by reconcile (writeback)
+schema_version: 1
+base_url: {{API_BASE_URL}}
+
+{{ENTITY_NAME_PLURAL}}:
+  - name: example-entity
+    slug: example-entity
+    desired_state: tbd
+    entity_id: null
+    last_reconciled: null

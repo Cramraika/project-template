@@ -1,0 +1,40 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "{{ORCHESTRATOR_NAME}}"
+version = "0.1.0"
+description = "{{VENDOR_NAME}} registry-as-IaC orchestrator (ADR-068 template)"
+requires-python = ">=3.12"
+dependencies = [
+    "pyyaml>=6.0",
+    "requests>=2.31",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4",
+    "ruff>=0.4.0",
+]
+
+[tool.setuptools]
+packages = ["{{ORCHESTRATOR_PKG}}", "{{ORCHESTRATOR_PKG}}.lib"]
+
+[project.scripts]
+{{ORCHESTRATOR_NAME}} = "{{ORCHESTRATOR_PKG}}.orchestrator:main"
+
+[tool.pytest.ini_options]
+pythonpath = [".", "tests"]
+testpaths = ["tests"]
+markers = [
+    "integration: hits real {{VENDOR_NAME}} API; skipped by default",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP"]
+ignore = ["E501"]
