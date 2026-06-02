@@ -8,19 +8,37 @@
     "group:allNonMajor"
   ],
   "timezone": "Asia/Calcutta",
+  "schedule": ["before 5am on monday"],
   "labels": ["dependencies", "renovate"],
   "prConcurrentLimit": 5,
   "prHourlyLimit": 2,
   "vulnerabilityAlerts": {
     "enabled": true,
-    "labels": ["security"]
+    "labels": ["security"],
+    "schedule": []
   },
   "packageRules": [
     {
-      "description": "Auto-merge minor and patch updates for dev dependencies",
+      "description": "Auto-merge ALL patch updates (production + dev deps)",
+      "matchUpdateTypes": ["patch", "pin", "digest"],
+      "automerge": true,
+      "automergeType": "branch",
+      "platformAutomerge": true
+    },
+    {
+      "description": "Auto-merge minor updates for dev dependencies only",
       "matchDepTypes": ["devDependencies"],
-      "matchUpdateTypes": ["minor", "patch"],
-      "automerge": true
+      "matchUpdateTypes": ["minor"],
+      "automerge": true,
+      "automergeType": "branch",
+      "platformAutomerge": true
+    },
+    {
+      "description": "Production minor updates: PR required (no automerge)",
+      "matchDepTypes": ["dependencies"],
+      "matchUpdateTypes": ["minor"],
+      "automerge": false,
+      "labels": ["dependencies", "minor-update", "needs-review"]
     },
     {
       "description": "Group Docker base image updates",
@@ -28,10 +46,24 @@
       "groupName": "docker base images"
     },
     {
-      "description": "Major updates need manual review",
+      "description": "Major updates require explicit review",
       "matchUpdateTypes": ["major"],
       "labels": ["major-update", "needs-review"],
-      "automerge": false
+      "automerge": false,
+      "automergeType": "pr"
+    },
+    {
+      "description": "Group Lockfile maintenance",
+      "matchUpdateTypes": ["lockFileMaintenance"],
+      "automerge": true,
+      "automergeType": "branch",
+      "schedule": ["before 5am on monday"]
     }
-  ]
+  ],
+  "lockFileMaintenance": {
+    "enabled": true,
+    "schedule": ["before 5am on monday"]
+  },
+  "rebaseWhen": "behind-base-branch",
+  "ignoreDeps": []
 }
