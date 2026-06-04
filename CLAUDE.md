@@ -75,7 +75,7 @@ Every new repo that deploys onto the dual-VPS platform SHOULD carry a `## VPS Se
 |---|---|---|---|
 | **Infisical** (secrets) | Project `[PROJECT_NAME]` id `[INFISICAL_PROJECT_ID]`, envs dev/staging/prod | `mcp__infisical__*` (read) / API with `vps-operator` creds (write) | `service-playbooks/substrate/infisical.md` §9.5 |
 | **Coolify** (orchestration) | App `[APP_NAME]` uuid `[COOLIFY_APP_UUID]`, runs on `[vagary-core-1|vagary-compute-1]` | Coolify API; MCP 404 over public → SSH `docker` fallback | `service-playbooks/substrate/coolify.md` §5,§7 |
-| **Reverse proxy** | `[Caddy vhost on core-1 | Traefik via Coolify on compute-1]` | Vhost via vps-ansible template / Coolify app config | `service-playbooks/substrate/{caddy,traefik}.md` |
+| **Reverse proxy** | `[Caddy vhost on core-1 | Traefik via Coolify on compute-1]` | Vhost via vps-ansible template / Coolify app config | `service-playbooks/substrate/{caddy,traefik}.md` (canonical) + appendix `05-architecture/part-B-service-appendices/vps-admin/substrate/traefik.md` |
 | **DNS + edge** | `[domain]` zone in Cloudflare (CF = DNS authority + edge layer: Workers / R2 / KV / Access / SSL-TLS / Tunnels) | CF API scoped token; CF zone holds product-domain records (Hostinger registrar-only per DNS-authority XOR) | `service-playbooks/substrate/cloudflare.md` |
 | **Error store** | GlitchTip/Sentry DSN (in Infisical) | Per-app project; never dual-report | `service-playbooks/observability/glitchtip.md` |
 | **Observability** | Loki `{app="[PROJECT_NAME]"}` + Prometheus | `grafana` / Loki MCP | `service-playbooks/observability/*.md` |
