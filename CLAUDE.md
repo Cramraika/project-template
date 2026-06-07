@@ -96,7 +96,7 @@ Three tiers (B1–B9 backup-class taxonomy):
 | **T2** | Coolify-deployed config-only product — weekly via existing substrate-config batch (no product cron) | B6 (config-only) | `.claude/scaffolds/backup/restic-T2.md` |
 | **T3** | Mobile / CLI / browser-store / Apps Script — no VPS state; GitHub Releases canonical | B9 (no VPS backup) | `.claude/scaffolds/backup/restic-T3.md` |
 
-**Canonical playbook:** `platform-docs/05-architecture/part-B-service-appendices/vps-admin/substrate/restic.md` (live deployment state + retention + ADR-019 amendments). **Master tier map:** `platform-docs/docs/audits/restic-session-worklog-2026-05-18.md` §W3 3.5.
+**Canonical playbook:** `platform-docs/05-architecture/part-B-service-appendices/vps-admin/substrate/restic.md` (live deployment state + retention + ADR-019 amendments). **Master tier map:** `platform-docs/docs/audits/_archive-2026-05/restic-session-worklog-2026-05-18.md` §W3 3.5.
 
 If unsure which tier applies, default to `skip` at init time and resolve during the first onboarding session against the master tier map.
 

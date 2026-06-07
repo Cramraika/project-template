@@ -34,7 +34,7 @@ The template ships with **three tier-scaled `CLAUDE.md` variants**. `init.sh` co
 
 ### Add-on: orchestrator scaffold
 
-Beyond the 3 tier variants, `init.sh` can additionally render an **orchestrator scaffold** per [ADR-068 registry-as-IaC pattern](https://github.com/Cramraika/platform-docs/blob/main/04-decision-memory/adrs/ADR-068-site-discoverability-orchestration.md). Pick this when the new repo's purpose is to **manage per-entity lifecycle against a vendor API** (Glitchtip projects, Mailcow domains, GSC properties, Cloudflare zones, etc.) in a `reconcile` + `apply` pattern.
+Beyond the 3 tier variants, `init.sh` can additionally render an **orchestrator scaffold** per [ADR-068 registry-as-IaC pattern](https://github.com/Cramraika/platform-docs/blob/main/04-decision-memory/adrs/ADR-068a-site-discoverability-orchestration.md). Pick this when the new repo's purpose is to **manage per-entity lifecycle against a vendor API** (Glitchtip projects, Mailcow domains, GSC properties, Cloudflare zones, etc.) in a `reconcile` + `apply` pattern.
 
 Reference orchestrators:
 - `vps_host/scripts/glitchtip-orchestrator/` (commit `83a04df`)
