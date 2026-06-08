@@ -2,7 +2,7 @@
 
 **Source:** copied by `init.sh` from `project-template/.claude/scaffolds/backup/restic-T1.md`.
 **Canonical playbook:** `platform-docs/05-architecture/part-B-service-appendices/vps-admin/substrate/restic.md` (live deployment state §2 + retention §3 + ADR-019 amendments).
-**Backup-class taxonomy:** B1–B9 — see `docs/audits/restic-session-worklog-2026-05-18.md` §W3 3.4.
+**Backup-class taxonomy:** B1–B9 — see `docs/audits/_archive-2026-05/restic-session-worklog-2026-05-18.md` §W3 3.4.
 
 ---
 
@@ -99,7 +99,7 @@ Document the Variant C drill in `docs/audits/restic-restore-drill-<YYYY-MM-DD>-<
 
 ## Onboarding checklist (numbered)
 
-1. **Confirm tier.** Cross-check the master tier map in `docs/audits/restic-session-worklog-2026-05-18.md` §W3 3.5. If product is not yet listed, propose addition via an audit-doc amendment before authoring cron.
+1. **Confirm tier.** Cross-check the master tier map in `docs/audits/_archive-2026-05/restic-session-worklog-2026-05-18.md` §W3 3.5. If product is not yet listed, propose addition via an audit-doc amendment before authoring cron.
 2. **Pick backup class** (B3 or B7). Justify in CLAUDE.md `## Backup Tier` section with one sentence on why the canonical state is DB-dump-able vs filesystem-snapshot-only.
 3. **Author cron file** at `/etc/cron.d/<product>-restic-backup` via vps-ansible (`vps-ansible/roles/restic-backup-product/`). **Never** hand-edit cron on the host.
 4. **Author wrapper** at `/usr/local/bin/restic-backup-<product>.sh` — copy from `vps_host/scripts/restic-backup-template-<B3|B7>.sh` and parameterize.
@@ -116,4 +116,4 @@ Document the Variant C drill in `docs/audits/restic-restore-drill-<YYYY-MM-DD>-<
 - ADRs: ADR-019 + Amendments A1/A2/A4/A6/A7/A8 + ADR-025 + ADR-030 A1/A2
 - Restore runbook: `platform-docs/docs/runbooks/restic-restore.md`
 - DR drill example (Portainer recovery): `platform-docs/docs/runbooks/restic-dr-drill-portainer-recovery.md`
-- Worklog: `platform-docs/docs/audits/restic-session-worklog-2026-05-18.md` §W3 + §W10
+- Worklog: `platform-docs/docs/audits/_archive-2026-05/restic-session-worklog-2026-05-18.md` §W3 + §W10

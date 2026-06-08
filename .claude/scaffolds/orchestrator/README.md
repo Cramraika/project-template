@@ -1,13 +1,13 @@
 # Orchestrator Tier Scaffold
 
-> **Per ADR-068 + OW-106 — registry-as-IaC orchestrator template.**
+> **Per ADR-068a + OW-106 — registry-as-IaC orchestrator template.**
 
 This scaffold builds a Python orchestrator repo (or sub-tree) following the canonical pattern proven by:
 
 - **Glitchtip orchestrator** (`vps_host/scripts/glitchtip-orchestrator/`, commit `83a04df`) — per-brand error-tracking project lifecycle.
 - **Mailcow orchestrator** (`vps_host/scripts/mailcow-orchestrator/`, commit `e04e612`) — per-domain mailbox + alias lifecycle.
 - **Site-discoverability orchestrator** (`vps_host/scripts/site-discoverability/`) — multi-vendor (GSC + GA4 + Bing) onboarding lifecycle.
-- **ADR-068** (`platform-docs/04-decision-memory/adrs/ADR-068-site-discoverability-orchestration.md`) — registry-as-IaC + least-privilege SA + master OAuth client.
+- **ADR-068a** (`platform-docs/04-decision-memory/adrs/ADR-068a-site-discoverability-orchestration.md`) — registry-as-IaC + least-privilege SA + master OAuth client.
 
 ## What `init.sh` renders
 

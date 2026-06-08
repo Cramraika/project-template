@@ -178,7 +178,7 @@ def cmd_list_live(args: argparse.Namespace) -> int:
 def build_parser() -> argparse.ArgumentParser:
     p = argparse.ArgumentParser(
         prog="{{ORCHESTRATOR_NAME}}",
-        description="{{VENDOR_NAME}} registry-as-IaC orchestrator (ADR-068 template)",
+        description="{{VENDOR_NAME}} registry-as-IaC orchestrator (ADR-068a template)",
     )
     p.add_argument(
         "--registry",

@@ -44,7 +44,7 @@ class {{VENDOR_NAME}}Client:
             {
                 "Authorization": f"Bearer {api_token}",
                 "Content-Type": "application/json",
-                "User-Agent": "{{ORCHESTRATOR_NAME}}/0.1.0 (registry-as-IaC; ADR-068)",
+                "User-Agent": "{{ORCHESTRATOR_NAME}}/0.1.0 (registry-as-IaC; ADR-068a)",
             }
         )
 

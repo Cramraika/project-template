@@ -2,7 +2,7 @@
 
 **Source:** copied by `init.sh` from `project-template/.claude/scaffolds/backup/restic-T3.md`.
 **Canonical playbook:** `platform-docs/05-architecture/part-B-service-appendices/vps-admin/substrate/restic.md`.
-**Backup-class taxonomy:** B1–B9 — see `docs/audits/restic-session-worklog-2026-05-18.md` §W3 3.4.
+**Backup-class taxonomy:** B1–B9 — see `docs/audits/_archive-2026-05/restic-session-worklog-2026-05-18.md` §W3 3.4.
 
 ---
 
@@ -71,5 +71,5 @@ For OSS forkers: same path — public GitHub Releases are the redistribution cha
 ## Cross-references
 
 - Canonical playbook: `platform-docs/05-architecture/part-B-service-appendices/vps-admin/substrate/restic.md`
-- Worklog: `platform-docs/docs/audits/restic-session-worklog-2026-05-18.md` §W3 + §W10
+- Worklog: `platform-docs/docs/audits/_archive-2026-05/restic-session-worklog-2026-05-18.md` §W3 + §W10
 - Sponsor-readiness / OSS rules: `~/.claude/conventions/playbooks/commercial-bound.md`

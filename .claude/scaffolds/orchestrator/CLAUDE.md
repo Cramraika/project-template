@@ -21,7 +21,7 @@ This repo is a **registry-as-IaC orchestrator** for **{{VENDOR_NAME}}**. It
 reconciles a declared YAML registry against the live vendor API, surfaces drift,
 and (with `--confirm`) creates missing entities.
 
-Pattern source: ADR-068 site-discoverability template (`platform-docs/04-decision-memory/adrs/ADR-068-site-discoverability-orchestration.md`).
+Pattern source: ADR-068 site-discoverability template (`platform-docs/04-decision-memory/adrs/ADR-068a-site-discoverability-orchestration.md`).
 Sibling examples: `vps_host/scripts/glitchtip-orchestrator/` (commit `83a04df`), `vps_host/scripts/mailcow-orchestrator/` (commit `e04e612`), `vps_host/scripts/site-discoverability/`.
 
 ## Stack

@@ -1,4 +1,4 @@
-"""{{VENDOR_NAME}} orchestrator — registry-as-IaC (ADR-068 template).
+"""{{VENDOR_NAME}} orchestrator — registry-as-IaC (ADR-068a template).
 
 Reconciles a declared YAML registry against the live {{VENDOR_NAME}} API.
 

@@ -1,6 +1,6 @@
 # Project Template
 
-> **Ready-to-fork GitHub Template with Claude Code v8 conventions, CI/CD, security rules, and 3 tiered CLAUDE.md variants baked in.**
+> **Ready-to-fork GitHub Template with Claude Code v52 conventions, CI/CD, security rules, and 3 tiered CLAUDE.md variants baked in.**
 
 [![GitHub Sponsors](https://img.shields.io/github/sponsors/Cramraika?logo=github&label=Sponsor)](https://github.com/sponsors/Cramraika)
 [![Use this template](https://img.shields.io/badge/-Use%20this%20template-2ea44f?logo=github)](https://github.com/Cramraika/project-template/generate)
@@ -47,9 +47,9 @@ Placeholders prompted (8): `ORCHESTRATOR_NAME`, `VENDOR_NAME`, `API_BASE_URL`, `
 
 ### Common preamble
 
-All three variants open with the same v8 preamble:
-- `VERSION: 2026-04-19-v8` tagged + `SYNC-SOURCE` pointing to `~/.claude/conventions/universal-claudemd.md`
-- References the 21 universal sections Claude should honor (laws, MCP routing, drift protocol, capability resolution, SKILL POLICY, session continuity, decision queue, attestation, cite format, three-way disagreement, pre-conditions, provenance markers, redaction rules, token budget, tool-failure fallback, prompt-injection rule, append-only discipline, BLOCKED_BY markers, stop-loss ladder, business-invariant checks, plugin rent rubric, context ceilings)
+All three variants open with the same slim v52 preamble:
+- `VERSION: 2026-06-04-v52` tagged + `SYNC-SOURCE` pointing to `~/.claude/conventions/universal-claudemd.md`
+- Universal laws (§1–§55) are NOT inlined — they load from `~/.claude/conventions/` (`universal-claudemd.summary.md` → `universal-claudemd.md` + `project-hygiene.md`) and are always in context; the preamble's job is to point at them + remind not to assume their content from memory (consult/verify per §34 / §43.6 / §43.7)
 - Sourced from `~/.claude/conventions/universal-claudemd.md` and `~/.claude/conventions/project-hygiene.md`
 
 Keep the preamble in sync across all per-repo files via `~/.claude/scripts/sync-preambles.py`.

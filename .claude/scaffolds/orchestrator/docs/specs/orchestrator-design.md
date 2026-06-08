@@ -1,7 +1,7 @@
 # {{ORCHESTRATOR_NAME}} — design
 
-> Design doc scaffold per ADR-068 site-discoverability template.
-> Pattern source: `~/Documents/Github/platform-docs/04-decision-memory/adrs/ADR-068-site-discoverability-orchestration.md`.
+> Design doc scaffold per ADR-068a site-discoverability template.
+> Pattern source: `~/Documents/Github/platform-docs/04-decision-memory/adrs/ADR-068a-site-discoverability-orchestration.md`.
 
 <!-- self-consistency closing-pass: counts re-derived + denominators verified + vocab merged + glossary grep clean — TODO at first publish per §27.6 -->
 

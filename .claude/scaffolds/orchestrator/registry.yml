@@ -1,6 +1,6 @@
 # {{VENDOR_NAME}} registry — registry-as-IaC declared state.
 #
-# Pattern source: ADR-068 site-discoverability template.
+# Pattern source: ADR-068a site-discoverability template.
 #
 # Universal rules:
 # - §27 append-only artefact discipline (writeback fields only).

@@ -35,7 +35,7 @@ case "$TIER" in
 esac
 
 echo ""
-echo "Orchestrator scaffold (per ADR-068 registry-as-IaC pattern):"
+echo "Orchestrator scaffold (per ADR-068a registry-as-IaC pattern):"
 echo "  y    = render orchestrator scaffold (Python 3.12+; reconcile/apply/verify)"
 echo "  n    = no orchestrator (default)"
 read -p "Add orchestrator scaffold? (y/n) [n]: " ORCH_ENABLED
@@ -146,7 +146,7 @@ case "$BACKUP_TIER" in
 esac
 
 # 4c. Render orchestrator scaffold (if enabled).
-# Per ADR-068 + OW-106: registry-as-IaC pattern (Glitchtip 83a04df + Mailcow e04e612 + site-discoverability).
+# Per ADR-068a + OW-106: registry-as-IaC pattern (Glitchtip 83a04df + Mailcow e04e612 + site-discoverability).
 if [ "$ORCH_ENABLED" = "y" ]; then
   if [ -f .claude/scaffolds/orchestrator/render.py ]; then
     PROJECT_ROOT="$(pwd)" python3 .claude/scaffolds/orchestrator/render.py

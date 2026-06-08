@@ -2,7 +2,7 @@
 
 **Source:** copied by `init.sh` from `project-template/.claude/scaffolds/backup/restic-T2.md`.
 **Canonical playbook:** `platform-docs/05-architecture/part-B-service-appendices/vps-admin/substrate/restic.md`.
-**Backup-class taxonomy:** B1–B9 — see `docs/audits/restic-session-worklog-2026-05-18.md` §W3 3.4.
+**Backup-class taxonomy:** B1–B9 — see `docs/audits/_archive-2026-05/restic-session-worklog-2026-05-18.md` §W3 3.4.
 
 ---
 
@@ -91,4 +91,4 @@ Document the first-time restore-test (Variant B sample-restore) in `docs/audits/
 - Canonical playbook: `platform-docs/05-architecture/part-B-service-appendices/vps-admin/substrate/restic.md`
 - ADRs: ADR-019 + ADR-025 + ADR-030
 - Restore runbook: `platform-docs/docs/runbooks/restic-restore.md`
-- Worklog: `platform-docs/docs/audits/restic-session-worklog-2026-05-18.md` §W3 + §W10
+- Worklog: `platform-docs/docs/audits/_archive-2026-05/restic-session-worklog-2026-05-18.md` §W3 + §W10

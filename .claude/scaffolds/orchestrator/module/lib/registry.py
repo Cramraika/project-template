@@ -1,6 +1,6 @@
 """Registry-as-IaC loader for the {{VENDOR_NAME}} orchestrator.
 
-Pattern source: ADR-068 site-discoverability template.
+Pattern source: ADR-068a site-discoverability template.
 - Declarative YAML at `<repo>/registry.yml` is source-of-truth.
 - Operator authors `desired_state`, `slug`, etc.
 - `entity_id` + `last_reconciled` are orchestrator writeback fields only.

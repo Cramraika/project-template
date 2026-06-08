@@ -1,7 +1,7 @@
 # {{ORCHESTRATOR_NAME}} — reconcile runbook
 
 > Operator runbook for `{{ORCHESTRATOR_NAME}}` registry-as-IaC orchestrator.
-> Pattern source: ADR-068 site-discoverability template.
+> Pattern source: ADR-068a site-discoverability template.
 
 ## Purpose
 

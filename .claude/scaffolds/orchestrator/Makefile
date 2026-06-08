@@ -1,6 +1,6 @@
 # {{ORCHESTRATOR_NAME}} — Makefile
 #
-# Standard targets per orchestrator-tier scaffold (ADR-068 template).
+# Standard targets per orchestrator-tier scaffold (ADR-068a template).
 # Universal §52 unattended-mode contract: each target returns non-zero on hard fail.
 
 PY      ?= python3

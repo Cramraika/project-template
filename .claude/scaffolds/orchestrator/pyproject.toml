@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "{{ORCHESTRATOR_NAME}}"
 version = "0.1.0"
-description = "{{VENDOR_NAME}} registry-as-IaC orchestrator (ADR-068 template)"
+description = "{{VENDOR_NAME}} registry-as-IaC orchestrator (ADR-068a template)"
 requires-python = ">=3.12"
 dependencies = [
     "pyyaml>=6.0",
