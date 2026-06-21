@@ -7,9 +7,18 @@
 
 Reusable template for new projects with Claude Code configuration, CI/CD pipelines, security settings, standardized `.gitignore`, Renovate dependency updates, and pre-push branch protection.
 
-## Sponsor
+## Support
 
-This template encodes months of real-world Claude Code workflow refinement — feel free to [sponsor the work](https://github.com/sponsors/Cramraika) if it saves you time spinning up new repos.
+This is a free / open-source utility. If it saves you time spinning up new repos,
+you can support the work via tips/sponsorship:
+
+- **GitHub Sponsors** — https://github.com/sponsors/Cramraika
+- **Patreon** — (see `.github/FUNDING.yml`)
+
+> Repos scaffolded from this template inherit `.github/FUNDING.yml` with
+> `{{sponsor-github}}` / `{{patreon}}` placeholders — fill them with your fleet
+> handles (the canonical GitHub Sponsors handle is `Cramraika`) and mirror them
+> in this **## Support** section.
 
 ## Quick Start
 
@@ -75,7 +84,9 @@ All three variants contain bracketed placeholders. `init.sh` fills two of them a
 | `.claude/settings.json` | Universal deny list for dangerous commands |
 | `.gitignore-templates/` | Language-specific `.gitignore` (node / python / fullstack / apps-script) |
 | `.github/workflows/` | CI/CD pipeline templates (node, python, fullstack, docker variants) + `renovate.yml` |
-| `.github/FUNDING.yml` | Sponsor config |
+| `.github/FUNDING.yml` | Tips/sponsorship config (placeholders — fill per repo) |
+| `LICENSE` | MIT license (the canonical OSS default for scaffolded repos) |
+| `CONTRIBUTING.md` | PR-acceptor contribution note |
 | `.githooks/pre-push` | Blocks direct push to `main/master` (auto-installed by init.sh) |
 | `.env.example` | Environment variable placeholder |
 | `renovate.json` | Renovate dependency-update config (auto-merge minor/patch dev deps) |
@@ -119,3 +130,12 @@ Every project created from this template gets:
 - `.env` read access denied in Claude Code
 - `pre-push` hook blocking direct pushes to `main` / `master`
 - Renovate `vulnerabilityAlerts.enabled = true`
+
+## License
+
+[MIT](LICENSE) © 2026 Vagary Labs.
+
+This is the canonical OSS license default: repos scaffolded from this template
+inherit the MIT `LICENSE` and should keep their README's stated license in
+agreement with it (per the Vagary Labs fleet licensing policy — free/OSS
+utilities ship MIT + accept contributions + accept tips).

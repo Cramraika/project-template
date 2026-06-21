@@ -1,12 +1,15 @@
-# GitHub Sponsors — https://github.com/sponsors/Cramraika
-github: [Cramraika]
+# Tips / sponsorship surface for this free OSS utility.
+# This is the canonical template default — every repo scaffolded from project-template
+# inherits this file. Replace the placeholders with the Vagary Labs fleet handles
+# (canonical GitHub Sponsors handle is `Cramraika`); use the SAME handles fleet-wide.
+github: [{{sponsor-github}}]
+patreon: {{patreon}}
 
-# Personal site with sponsor info
+# Personal site / custom sponsor link(s):
 custom:
-  - https://chinmayramraika.in
+  - {{custom-sponsor-url}}
 
-# Add these when accounts are created:
-# polar: chinmayramraika
-# ko_fi: chinmayramraika
-# buy_me_a_coffee: chinmayramraika
-
+# Add these when the accounts are created:
+# polar: {{polar}}
+# ko_fi: {{ko-fi}}
+# buy_me_a_coffee: {{buy-me-a-coffee}}
