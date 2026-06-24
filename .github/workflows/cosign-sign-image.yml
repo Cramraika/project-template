@@ -88,9 +88,12 @@ jobs:
       - name: Generate SBOM (syft)
         uses: anchore/sbom-action@v0
         with:
+          # CycloneDX is the fleet-canonical SBOM format (host syft-sbom.sh emits
+          # cyclonedx-json + --search queries .components[]). Keep CI in lock-step so a
+          # CI-attested image is queryable by the host emergency-triage path (OW-523).
           image: ghcr.io/${{ env.IMAGE_REPO_LOWER }}@${{ steps.build.outputs.digest }}
-          format: spdx-json
-          output-file: sbom.spdx.json
+          format: cyclonedx-json
+          output-file: sbom.cdx.json
 
       - name: Attach SBOM to image
         env:
@@ -98,7 +101,7 @@ jobs:
           COSIGN_PASSWORD: ${{ secrets.COSIGN_PASSWORD }}
         run: |
           cosign attest --yes --key env://COSIGN_PRIVATE_KEY \
-            --predicate sbom.spdx.json --type spdxjson \
+            --predicate sbom.cdx.json --type cyclonedx \
             "ghcr.io/${{ env.IMAGE_REPO_LOWER }}@${{ steps.build.outputs.digest }}"
 
       - name: Verify signature (smoke test)
