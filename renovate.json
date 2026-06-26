@@ -5,17 +5,24 @@
     ":semanticCommits",
     ":dependencyDashboard",
     ":rebaseStalePrs",
-    "group:allNonMajor"
+    "group:allNonMajor",
+    "mergeConfidence:all-badges"
   ],
   "timezone": "Asia/Calcutta",
   "schedule": ["before 5am on monday"],
   "labels": ["dependencies", "renovate"],
   "prConcurrentLimit": 5,
   "prHourlyLimit": 2,
+  "rangeStrategy": "bump",
+  "separateMinorPatch": true,
+  "separateMultipleMajor": true,
+  "minimumReleaseAge": "3 days",
+  "osvVulnerabilityAlerts": true,
   "vulnerabilityAlerts": {
     "enabled": true,
-    "labels": ["security"],
-    "schedule": []
+    "labels": ["security", "vulnerability"],
+    "schedule": [],
+    "minimumReleaseAge": null
   },
   "packageRules": [
     {
@@ -44,6 +51,12 @@
       "description": "Group Docker base image updates",
       "matchManagers": ["dockerfile", "docker-compose"],
       "groupName": "docker base images"
+    },
+    {
+      "description": "Group + pin GitHub Actions to digests (supply-chain hardening)",
+      "matchManagers": ["github-actions"],
+      "groupName": "github-actions",
+      "pinDigests": true
     },
     {
       "description": "Major updates require explicit review",
