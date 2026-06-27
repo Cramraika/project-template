@@ -14,7 +14,7 @@ jobs:
   lint-backend:
     name: Lint Backend
     runs-on: ubuntu-latest
-    if: ${{ hashFiles('backend/**/*.py') != '' }}
+    if: ${{ github.repository != 'Cramraika/project-template' }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -28,7 +28,7 @@ jobs:
   build-backend:
     name: Build Backend Docker
     runs-on: ubuntu-latest
-    if: ${{ hashFiles('backend/Dockerfile') != '' }}
+    if: ${{ github.repository != 'Cramraika/project-template' }}
     steps:
       - uses: actions/checkout@v4
       - uses: docker/setup-buildx-action@v3
@@ -42,7 +42,7 @@ jobs:
   build-frontend:
     name: Build Frontend
     runs-on: ubuntu-latest
-    if: ${{ hashFiles('frontend/package.json') != '' }}
+    if: ${{ github.repository != 'Cramraika/project-template' }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
