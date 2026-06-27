@@ -1,4 +1,4 @@
-name: CI
+name: CI-node-docker
 
 on:
   push:
@@ -14,6 +14,7 @@ jobs:
   lint:
     name: Lint & Build
     runs-on: ubuntu-latest
+    if: ${{ hashFiles('package.json') != '' }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -29,6 +30,7 @@ jobs:
   docker-build:
     name: Docker Build
     runs-on: ubuntu-latest
+    if: ${{ hashFiles('Dockerfile') != '' }}
     steps:
       - uses: actions/checkout@v4
       - uses: docker/setup-buildx-action@v3
