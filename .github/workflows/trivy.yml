@@ -41,7 +41,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Run Trivy vulnerability scanner (table output)
-        uses: aquasecurity/trivy-action@0.36.0
+        uses: aquasecurity/trivy-action@v0.36.0
         continue-on-error: true
         with:
           scan-type: 'fs'
@@ -52,7 +52,7 @@ jobs:
           exit-code: '0'  # advisory mode; flip to '1' to block on findings
 
       - name: Run Trivy vulnerability scanner (SARIF for Code Scanning)
-        uses: aquasecurity/trivy-action@0.36.0
+        uses: aquasecurity/trivy-action@v0.36.0
         continue-on-error: true
         with:
           scan-type: 'fs'
